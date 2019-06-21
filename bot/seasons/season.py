@@ -366,7 +366,8 @@ class SeasonManager(commands.Cog):
             # If the season has changed, load it.
             new_season = get_season(date=datetime.datetime.utcnow())
             if new_season.name != self.season.name:
-                await self.season.load()
+                self.season = new_season
+                await new_season.load()
 
     @with_role(Roles.moderator, Roles.admin, Roles.owner)
     @commands.command(name="season")
